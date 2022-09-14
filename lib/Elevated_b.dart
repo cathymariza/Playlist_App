@@ -70,8 +70,7 @@ class ToDoListItem extends StatelessWidget {
         style: _getTextStyle(context),
       ),
       trailing: CircleAvatar(
-        child: Text(item.abbrev()),
-      
+       child: Text(item.abbrev()),
       //floatingActionButton: NewButton(
         //onPressed: ,
       

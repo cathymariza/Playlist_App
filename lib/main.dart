@@ -1,6 +1,10 @@
 // Started with https://docs.flutter.dev/development/ui/widgets-intro
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:to_dont_list/NewButton.dart';
 import 'package:to_dont_list/to_do_items.dart';
+import 'package:flutter/src/widgets/editable_text.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class ToDoList extends StatefulWidget {
   const ToDoList({super.key});
@@ -16,6 +20,10 @@ class _ToDoListState extends State<ToDoList> {
       textStyle: const TextStyle(fontSize: 20), primary: Colors.green);
   final ButtonStyle noStyle = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 20), primary: Colors.red);
+  final ButtonStyle myStyle = ElevatedButton.styleFrom(
+      textStyle: const TextStyle(fontSize: 20), primary: Colors.blue);
+      
+        //get actions => null;
 
   Future<void> _displayTextInputDialog(BuildContext context) async {
     print("Loading Dialog");
@@ -46,6 +54,19 @@ class _ToDoListState extends State<ToDoList> {
                   });
                 },
               ),
+            //actions: <Widget>[
+              //ElevatedButton(
+                //key: const Key("OKButton"),
+                //style: myStyle,
+                //child: const Text('OK'),
+                //onPressed: () {
+                  //setState(() {
+                    //_handleNewItem(valueText);
+                    //Navigator.pop(context);
+                  //});
+                //},
+              //),
+              
 
               // https://stackoverflow.com/questions/52468987/how-to-turn-disabled-button-into-enabled-button-depending-on-conditions
               ValueListenableBuilder<TextEditingValue>(
@@ -117,7 +138,8 @@ class _ToDoListState extends State<ToDoList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('To Do List'),
+          title: const Text('Better get this done'),
+          //home: MyStatefulWidget()
         ),
         body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -129,9 +151,44 @@ class _ToDoListState extends State<ToDoList> {
               onDeleteItem: _handleDeleteItem,
             );
           }).toList(),
+          //child: 
         ),
-        floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.add),
+        bottomNavigationBar: const GNav(
+          tabs: const [
+            GButton(
+              icon: Icons.home,
+              text: 'Home',
+              //textStyle: null,
+              ),
+            GButton(
+              icon: Icons.search,
+              text: 'Search',
+              ),
+            GButton(
+              icon: Icons.favorite_border,
+              text: 'Favorite',
+              ),
+            GButton(
+              icon: Icons.settings,
+              text: 'Settings',
+              ),
+
+          ],
+        )
+          //BottomAppBar(
+            //shape: const CircularNotchedRectangle(),
+              //child: Container(height: 50.0), 
+
+              //_displayTextInputDialog(BuildContext context) async {
+              //print("Loading Dialog");
+              //return showDialog(
+                  
+            //child: Container(height: 50.0),
+          ,
+     
+          
+        floatingActionButton: NewButton(
+          //child: const Icon(Icons.add),
             onPressed: () {
               _displayTextInputDialog(context);
             }));
