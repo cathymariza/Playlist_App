@@ -1,22 +1,19 @@
-# To Don't List
+# Better Get it Done App
 
-A Flutter Demo project.
+## What the App Does
 
-## Edit Me
+Better Get it Done App is a simple to do list mobile app that should help the user to keep track of the tasks they are supposed to do. It is easy to read and very user friendly.
 
-This is the file you should edit to describe your modified app.
+## How it Works
 
-A README.md is written using [Markdown](https://www.markdownguide.org/), a simple language for formatting text that can be rendered as a web page. This README.md information will be displayed on the GitHub main page for your repository. Here is a resource specifically for Markdown syntax and GitHub.
+When you first open the app, you will see a greyish button in the bottom right corner, right above the navigation bar, that says "Add". When you click on that, you will see a small window that allows you to add an activity that you want to add to your to do list. After typing it in, you hit okay the "OK" button and it adds your activity to the activity list.
 
-* <https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax>
+## Structural Details
 
-Now, with a text editor on your cloned repository, or by clicking on the edit icon ✏️ on the main github.com page for your forked repository, edit the README.md file in the root directory to provide details about your app’s functionality. Be sure to follow the guidelines of the GitHub documentation on what to include in your README.md file.
+This app uses a listview widget to display activities in a scrollable list. So, far, it has one screen but I'm currently working on it to make significant improvements and make it more usable.
 
-* <https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes>
+## Target Audience for the App
 
-The most important pieces to include right now are
+This app can be used by anyone, from office workers who want to keep track of their meetings and otheer activities to students who want to keep track of how far they are on their assignments. It has a useful feature for crossing out and/or deleting items that you finished working on. This helps the user to remain organized.
 
-* Who is the audience for this app
-* What the app does
-* Why the app is useful
-* Multiple Screenshots of your app
+
