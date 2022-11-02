@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'NewButton.dart';
 import 'main.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class Item {
   const Item({required this.name});
@@ -69,13 +70,8 @@ class ToDoListItem extends StatelessWidget {
         item.name,
         style: _getTextStyle(context),
       ),
-      trailing: CircleAvatar(
-        child: Text(item.abbrev()),
+      trailing: Icon(Icons.favorite_border),
       
-      //floatingActionButton: NewButton(
-        //onPressed: ,
-      
-      ),
-   );
+      );
   }
 }

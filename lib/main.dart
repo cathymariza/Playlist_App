@@ -2,20 +2,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:to_dont_list/NewButton.dart';
-import 'package:to_dont_list/to_do_items.dart';
+import 'package:to_dont_list/my_item.dart';
+//import 'package:to_dont_list/to_do_items.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class ToDoList extends StatefulWidget {
-  const ToDoList({super.key});
+class MySong extends StatefulWidget {
+  const MySong({super.key});
 
   @override
-  State createState() => _ToDoListState();
+  State createState() => _MySongState();
 }
 
-class _ToDoListState extends State<ToDoList> {
+class _MySongState extends State<MySong> {
   // Dialog with text from https://www.appsdeveloperblog.com/alert-dialog-with-a-text-field-in-flutter/
   final TextEditingController _inputController = TextEditingController();
+  final TextEditingController _subtitleController = TextEditingController();
   final ButtonStyle yesStyle = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 20), primary: Colors.green);
   final ButtonStyle noStyle = ElevatedButton.styleFrom(
@@ -32,7 +34,7 @@ class _ToDoListState extends State<ToDoList> {
         builder: (context) {
           return AlertDialog(
             title: const Text('Item To Add'),
-            content: TextField(
+            /*content: TextField(
               onChanged: (value) {
                 setState(() {
                   valueText = value;
@@ -41,6 +43,30 @@ class _ToDoListState extends State<ToDoList> {
               controller: _inputController,
               decoration:
                   const InputDecoration(hintText: "type something here"),
+            ),*/
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        valueText = value;
+                });
+              },
+                      controller: _inputController,
+                      decoration:
+                  const InputDecoration(hintText: "type something here"),),
+                TextField(
+                    onChanged: (subttitle) {
+                      setState(() {
+                  itstext = subttitle;
+                });
+              },
+              controller: _subtitleController,
+              decoration:
+                  const InputDecoration(hintText: "type something here"),),
+              ],
             ),
             actions: <Widget>[
               ElevatedButton(
@@ -92,12 +118,14 @@ class _ToDoListState extends State<ToDoList> {
   }
 
   String valueText = "";
+  String itstext = "";
 
-  final List<Item> items = [const Item(name: "add more todos")];
+  final List<Item> items = [const Item(name: "add more songs", ssubtitle: "add subtitle")];
 
-  final _itemSet = <Item>{};
 
-  void _handleListChanged(Item item, bool completed) {
+  //final _itemSet = <Item>{};
+
+  void _handleListChanged(Item song) {
     setState(() {
       // When a user changes what's in the list, you need
       // to change _itemSet inside a setState call to
@@ -105,8 +133,8 @@ class _ToDoListState extends State<ToDoList> {
       // The framework then calls build, below,
       // which updates the visual appearance of the app.
 
-      items.remove(item);
-      if (!completed) {
+      items.remove(song);
+      /*if (!completed) {
         print("Completing");
         _itemSet.add(item);
         items.add(item);
@@ -114,22 +142,22 @@ class _ToDoListState extends State<ToDoList> {
         print("Making Undone");
         _itemSet.remove(item);
         items.insert(0, item);
-      }
+      }*/
     });
   }
 
-  void _handleDeleteItem(Item item) {
+  void _handleDeleteItem(Item song) {
     setState(() {
       print("Deleting item");
-      items.remove(item);
+      items.remove(song);
     });
   }
 
   void _handleNewItem(String itemText) {
     setState(() {
       print("Adding new item");
-      Item item = Item(name: itemText);
-      items.insert(0, item);
+      Item song = Item(name: itemText, ssubtitle: itemText);
+      items.insert(0, song);
       _inputController.clear();
     });
   }
@@ -139,38 +167,46 @@ class _ToDoListState extends State<ToDoList> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Better get this done'),
+          backgroundColor: Colors.blueGrey,
           //home: MyStatefulWidget()
         ),
         body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          children: items.map((item) {
-            return ToDoListItem(
-              item: item,
-              completed: _itemSet.contains(item),
-              onListChanged: _handleListChanged,
-              onDeleteItem: _handleDeleteItem,
-            );
+          children: items.map((name) {
+            return MySongItem(
+              onDeleteItem: _handleDeleteItem, 
+              onListTapped: _handleListChanged, song: name,
+              //onListTapped: _handleNewItem,
+              );
+            /*return MySongItem(
+              item: song,
+              //completed: _itemSet.contains(item),
+              //onListChanged: _handleListChanged,
+              //on: _handleDeleteItem, onListTapped: (Item song) {  }, onDeleteItem: (Item song) {  },
+
+            );*/
           }).toList(),
+
           //child: 
         ),
         bottomNavigationBar: const GNav(
-          tabs: const [
+          backgroundColor: Colors.blueGrey,
+          tabs: [
             GButton(
               icon: Icons.home,
               text: 'Home',
+              iconColor: Colors.blue,
               //textStyle: null,
               ),
             GButton(
               icon: Icons.search,
               text: 'Search',
-              ),
-            GButton(
-              icon: Icons.favorite_border,
-              text: 'Favorite',
+              iconColor: Colors.amberAccent,
               ),
             GButton(
               icon: Icons.settings,
               text: 'Settings',
+              iconColor: Colors.grey,
               ),
 
           ],
@@ -198,6 +234,6 @@ class _ToDoListState extends State<ToDoList> {
 void main() {
   runApp(const MaterialApp(
     title: 'To Do List',
-    home: ToDoList(),
+    home: MySong(),
   ));
 }
