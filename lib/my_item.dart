@@ -15,7 +15,7 @@ class Item {
 }
 
 
-typedef MySongChangedCallback = Function(Item song //bool completed
+typedef MySongChangedCallback = Function(Item song , bool saved
 );
 typedef MySongRemovedCallback = Function(Item song);
 
@@ -81,11 +81,13 @@ class MySongItem extends StatelessWidget {
   MySongItem(
     {
       required this.song,
+      required this.saved,
       required this.onListTapped,
       required this.onDeleteItem,
     }) : super(key: ObjectKey(song));
 
     final Item song;
+    final bool saved;
     final MySongChangedCallback onListTapped;
     final MySongRemovedCallback onDeleteItem;
 
@@ -94,7 +96,7 @@ class MySongItem extends StatelessWidget {
     return Card(
         child: ListTile(
       onTap: () {
-        onListTapped(song);
+        onListTapped(song, saved);
       },
       onLongPress: () {
         onDeleteItem(song);
@@ -107,7 +109,10 @@ class MySongItem extends StatelessWidget {
         song.name,
       ),
       subtitle: Text(song.ssubtitle),
-      trailing: Icon(Icons.favorite_border)
+      trailing: Icon(
+        saved ? Icons.favorite: Icons.favorite_border,
+        color: saved ? Colors.red : null,
+        )
     ));
 
     

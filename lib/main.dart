@@ -25,6 +25,7 @@ class _MySongState extends State<MySong> {
   final ButtonStyle myStyle = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 20), primary: Colors.blue);
       
+      
         //get actions => null;
 
   Future<void> _displayTextInputDialog(BuildContext context) async {
@@ -121,11 +122,10 @@ class _MySongState extends State<MySong> {
   String itstext = "";
 
   final List<Item> items = [const Item(name: "add more songs", ssubtitle: "add subtitle")];
+  final _itemSet = <Item>{};
+  Set<String> savedsongs = Set<String>();
 
-
-  //final _itemSet = <Item>{};
-
-  void _handleListChanged(Item song) {
+  void _handleListChanged(Item song, bool saved) {
     setState(() {
       // When a user changes what's in the list, you need
       // to change _itemSet inside a setState call to
@@ -134,15 +134,15 @@ class _MySongState extends State<MySong> {
       // which updates the visual appearance of the app.
 
       items.remove(song);
-      /*if (!completed) {
+      if (!saved) {
         print("Completing");
-        _itemSet.add(item);
-        items.add(item);
+        _itemSet.add(song);
+        items.add(song);
       } else {
         print("Making Undone");
-        _itemSet.remove(item);
-        items.insert(0, item);
-      }*/
+        _itemSet.remove(song);
+        items.insert(0, song);
+      }
     });
   }
 
@@ -174,6 +174,7 @@ class _MySongState extends State<MySong> {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           children: items.map((name) {
             return MySongItem(
+              saved: _itemSet.contains(name),
               onDeleteItem: _handleDeleteItem, 
               onListTapped: _handleListChanged, song: name,
               //onListTapped: _handleNewItem,
