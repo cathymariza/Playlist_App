@@ -159,6 +159,7 @@ class _MySongState extends State<MySong> {
       Item song = Item(name: valueText, ssubtitle: itstext);
       items.insert(0, song);
       _inputController.clear();
+      _subtitleController.clear();
     });
   }
 
