@@ -9,11 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:to_dont_list/main.dart';
-import 'package:to_dont_list/to_do_items.dart';
+import 'package:to_dont_list/my_item.dart';
 
 void main() {
   test('Item abbreviation should be first letter', () {
-    const item = Item(name: "add more todos");
+    const item = Item(name: "add a new song", ssubtitle: "add the artist's name");
     expect(item.abbrev(), "a");
   });
 
@@ -21,11 +21,11 @@ void main() {
   testWidgets('ToDoListItem has a text', (tester) async {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-            body: ToDoListItem(
-                item: const Item(name: "test"),
-                completed: true,
-                onListChanged: (Item item, bool completed) {},
-                onDeleteItem: (Item item) {}))));
+            body: MySongItem(
+                song: const Item(name: "test", ssubtitle: 'testartist'),
+                saved: true,
+                onListTapped: (Item song, bool saved) {},
+                onDeleteItem: (Item name){}))));
     final textFinder = find.text('test');
 
     // Use the `findsOneWidget` matcher provided by flutter_test to verify
@@ -37,10 +37,10 @@ void main() {
       (tester) async {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-            body: ToDoListItem(
-                item: const Item(name: "test"),
-                completed: true,
-                onListChanged: (Item item, bool completed) {},
+            body: MySongItem(
+                song: const Item(name: "test", ssubtitle: 'testartist'),
+                saved: true,
+                onListTapped: (Item song, bool saved) {},
                 onDeleteItem: (Item item) {}))));
     final abbvFinder = find.text('t');
     final avatarFinder = find.byType(CircleAvatar);
@@ -58,7 +58,7 @@ void main() {
   testWidgets('Default ToDoList has one item', (tester) async {
     await tester.pumpWidget(const MaterialApp(home: MySong()));
 
-    final listItemFinder = find.byType(ToDoListItem);
+    final listItemFinder = find.byType(MySongItem);
 
     expect(listItemFinder, findsOneWidget);
   });
@@ -80,7 +80,7 @@ void main() {
     await tester.pump();
     expect(find.text("hi"), findsOneWidget);
 
-    final listItemFinder = find.byType(ToDoListItem);
+    final listItemFinder = find.byType(MySongItem);
 
     expect(listItemFinder, findsNWidgets(2));
   });

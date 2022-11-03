@@ -76,7 +76,7 @@ class _MySongState extends State<MySong> {
                 child: const Text('OK'),
                 onPressed: () {
                   setState(() {
-                    _handleNewItem(valueText);
+                    _handleNewItem(valueText, itstext);
                     Navigator.pop(context);
                   });
                 },
@@ -153,10 +153,10 @@ class _MySongState extends State<MySong> {
     });
   }
 
-  void _handleNewItem(String itemText) {
+  void _handleNewItem(String valueText, String itstext) {
     setState(() {
       print("Adding new item");
-      Item song = Item(name: itemText, ssubtitle: itemText);
+      Item song = Item(name: valueText, ssubtitle: itstext);
       items.insert(0, song);
       _inputController.clear();
     });
