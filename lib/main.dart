@@ -35,16 +35,6 @@ class _MySongState extends State<MySong> {
         builder: (context) {
           return AlertDialog(
             title: const Text('Item To Add'),
-            /*content: TextField(
-              onChanged: (value) {
-                setState(() {
-                  valueText = value;
-                });
-              },
-              controller: _inputController,
-              decoration:
-                  const InputDecoration(hintText: "type something here"),
-            ),*/
             content: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -81,20 +71,6 @@ class _MySongState extends State<MySong> {
                   });
                 },
               ),
-            //actions: <Widget>[
-              //ElevatedButton(
-                //key: const Key("OKButton"),
-                //style: myStyle,
-                //child: const Text('OK'),
-                //onPressed: () {
-                  //setState(() {
-                    //_handleNewItem(valueText);
-                    //Navigator.pop(context);
-                  //});
-                //},
-              //),
-              
-
               // https://stackoverflow.com/questions/52468987/how-to-turn-disabled-button-into-enabled-button-depending-on-conditions
               ValueListenableBuilder<TextEditingValue>(
                 valueListenable: _inputController,
@@ -180,13 +156,6 @@ class _MySongState extends State<MySong> {
               onListTapped: _handleListChanged, song: name,
               //onListTapped: _handleNewItem,
               );
-            /*return MySongItem(
-              item: song,
-              //completed: _itemSet.contains(item),
-              //onListChanged: _handleListChanged,
-              //on: _handleDeleteItem, onListTapped: (Item song) {  }, onDeleteItem: (Item song) {  },
-
-            );*/
           }).toList(),
 
           //child: 
@@ -235,7 +204,7 @@ class _MySongState extends State<MySong> {
 
 void main() {
   runApp(const MaterialApp(
-    title: 'To Do List',
+    title: 'Playlist App',
     home: MySong(),
   ));
 }
