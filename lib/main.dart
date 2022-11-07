@@ -97,7 +97,8 @@ class _MySongState extends State<MySong> {
   String valueText = "";
   String itstext = "";
 
-  final List<Item> items = [const Item(name: "Add a new song", ssubtitle: "Add song link")];
+  //final List<Item> items = [const Item(name: "Add a new song", ssubtitle: "Add song link")];
+  final List<Item> items = [];
   final _itemSet = <Item>{};
   Set<String> savedsongs = Set<String>();
 
