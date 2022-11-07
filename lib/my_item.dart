@@ -102,7 +102,8 @@ class MySongItem extends StatelessWidget {
         onDeleteItem(song);
       },
       leading: CircleAvatar(
-        backgroundColor: Theme.of(context).primaryColor,
+        //backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.blueGrey,
         child: Text(song.name[0].toUpperCase()),
       ),
       title: Text(

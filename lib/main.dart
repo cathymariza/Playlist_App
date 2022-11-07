@@ -47,7 +47,7 @@ class _MySongState extends State<MySong> {
               },
                       controller: _inputController,
                       decoration:
-                  const InputDecoration(hintText: "type something here"),),
+                  const InputDecoration(hintText: "type song here"),),
                 TextField(
                     onChanged: (subttitle) {
                       setState(() {
@@ -56,7 +56,7 @@ class _MySongState extends State<MySong> {
               },
               controller: _subtitleController,
               decoration:
-                  const InputDecoration(hintText: "type something here"),),
+                  const InputDecoration(hintText: "type link here"),),
               ],
             ),
             actions: <Widget>[
@@ -97,7 +97,7 @@ class _MySongState extends State<MySong> {
   String valueText = "";
   String itstext = "";
 
-  final List<Item> items = [const Item(name: "add more songs", ssubtitle: "add subtitle")];
+  final List<Item> items = [const Item(name: "Add a new song", ssubtitle: "Add song link")];
   final _itemSet = <Item>{};
   Set<String> savedsongs = Set<String>();
 

@@ -14,7 +14,7 @@ class NewButton extends StatelessWidget{
       splashColor: Colors.grey,
       shape: const StadiumBorder(),
       onPressed: onPressed,
-      child: Text("NEXT")
+      child: Text("New")
       ); 
   }
 

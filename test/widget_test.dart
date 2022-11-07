@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:to_dont_list/NewButton.dart';
 
 import 'package:to_dont_list/main.dart';
 import 'package:to_dont_list/my_item.dart';
@@ -41,7 +42,7 @@ void main() {
                 song: const Item(name: "test", ssubtitle: 'testartist'),
                 saved: true,
                 onListTapped: (Item song, bool saved) {},
-                onDeleteItem: (Item item) {}))));
+                onDeleteItem: (Item song) {}))));
     final abbvFinder = find.text('t');
     final avatarFinder = find.byType(CircleAvatar);
 
@@ -67,8 +68,9 @@ void main() {
     await tester.pumpWidget(const MaterialApp(home: MySong()));
 
     expect(find.byType(TextField), findsNothing);
+    expect(find.byType(TextField), findsNothing);
 
-    await tester.tap(find.byType(FloatingActionButton));
+    await tester.tap(find.byType(NewButton));
     await tester.pump(); // Pump after every action to rebuild the widgets
     expect(find.text("hi"), findsNothing);
 
