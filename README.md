@@ -16,4 +16,8 @@ This app uses a listview widget to display activities in a scrollable list. So, 
 
 This app can be used by anyone, from office workers who want to keep track of their meetings and otheer activities to students who want to keep track of how far they are on their assignments. It has a useful feature for crossing out and/or deleting items that you finished working on. This helps the user to remain organized.
 
+![Home screen](/assets/add new song.png)
+
+
+
 
