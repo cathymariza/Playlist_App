@@ -16,8 +16,6 @@ When you click on that, you will see a small Dialogue Box that has two text fiel
 
 ![Home Screen](assets/list%20of%20songs%20favorited.png)
 
-![Home Screen](assets/Screen%20Shot%202022-11-09%20at%2011.25.54%20AM.png)
-
 ## Structural Details
 
 This app uses a listview widget to display activities in a scrollable list. So, far, it has one screen and a dialogue box, with two text fields. It also has a favorites function, where you can like which ine if your songs you prefer listening to the most. 
@@ -27,9 +25,6 @@ This app uses a listview widget to display activities in a scrollable list. So, 
 This app can be used by anyone, from students who want to keep track of the songs they prefer listening to while working on school assignments and anyone who just enjoys listening to different songs and likes having them organized in one place. It has a useful feature for crossing for deleting songs you don't want anymore and liking those that you listen to frequently. This helps the user to remain organized.
 
 
-![Home Screen](assets/add%20new%20song.png)
-![Home Screen](assets/list%20of%20songs%20favorited.png)
-![Home Screen](assets/Screen%20Shot%202022-11-09%20at%2011.25.54%20AM.png)
 
 
 
