@@ -7,6 +7,8 @@ import 'package:to_dont_list/my_item.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+List<String> songs = [];
+
 class MySong extends StatefulWidget {
   const MySong({super.key});
 
@@ -24,9 +26,8 @@ class _MySongState extends State<MySong> {
       textStyle: const TextStyle(fontSize: 20), primary: Colors.red);
   final ButtonStyle myStyle = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 20), primary: Colors.blue);
-      
-      
-        //get actions => null;
+
+  //get actions => null;
 
   Future<void> _displayTextInputDialog(BuildContext context) async {
     print("Loading Dialog");
@@ -40,23 +41,23 @@ class _MySongState extends State<MySong> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 TextField(
-                    onChanged: (value) {
-                      setState(() {
-                        valueText = value;
-                });
-              },
-                      controller: _inputController,
-                      decoration:
-                  const InputDecoration(hintText: "type song here"),),
+                  onChanged: (value) {
+                    setState(() {
+                      valueText = value;
+                    });
+                  },
+                  controller: _inputController,
+                  decoration: const InputDecoration(hintText: "type song here"),
+                ),
                 TextField(
-                    onChanged: (subttitle) {
-                      setState(() {
-                  itstext = subttitle;
-                });
-              },
-              controller: _subtitleController,
-              decoration:
-                  const InputDecoration(hintText: "type link here"),),
+                  onChanged: (subttitle) {
+                    setState(() {
+                      itstext = subttitle;
+                    });
+                  },
+                  controller: _subtitleController,
+                  decoration: const InputDecoration(hintText: "type link here"),
+                ),
               ],
             ),
             actions: <Widget>[
@@ -135,6 +136,7 @@ class _MySongState extends State<MySong> {
       print("Adding new item");
       Item song = Item(name: valueText, ssubtitle: itstext);
       items.insert(0, song);
+      songs.add(song.name);
       _inputController.clear();
       _subtitleController.clear();
     });
@@ -153,53 +155,135 @@ class _MySongState extends State<MySong> {
           children: items.map((name) {
             return MySongItem(
               saved: _itemSet.contains(name),
-              onDeleteItem: _handleDeleteItem, 
+              onDeleteItem: _handleDeleteItem,
               onListTapped: _handleListChanged, song: name,
               //onListTapped: _handleNewItem,
-              );
+            );
           }).toList(),
 
-          //child: 
+          //child:
         ),
-        bottomNavigationBar: const GNav(
-          backgroundColor: Colors.blueGrey,
-          tabs: [
-            GButton(
-              icon: Icons.home,
-              text: 'Home',
-              iconColor: Colors.blue,
-              //textStyle: null,
+        bottomNavigationBar: Row(
+          children: [
+            Expanded(
+              child: IconButton(
+                  key: Key("homeicon"),
+                  onPressed: () {},
+                  icon: Icon(Icons.home),
+                  color: Colors.blue),
+            ),
+            Expanded(
+              child: IconButton(
+                key: Key("searchicon"),
+                onPressed: () {
+                  showSearch(
+                      context: context,
+                      delegate: MySearchDelegate(),
+                      useRootNavigator: true);
+                },
+                icon: Icon(Icons.search),
+                color: Colors.amberAccent,
               ),
-            GButton(
-              icon: Icons.search,
-              text: 'Search',
-              iconColor: Colors.amberAccent,
-              ),
-            GButton(
-              icon: Icons.settings,
-              text: 'Settings',
-              iconColor: Colors.grey,
-              ),
-
+            ),
+            Expanded(
+                child: IconButton(
+              key: Key("settingsicon"),
+              onPressed: () {},
+              icon: Icon(Icons.settings),
+              color: Colors.grey,
+            )),
           ],
-        )
-          //BottomAppBar(
-            //shape: const CircularNotchedRectangle(),
-              //child: Container(height: 50.0), 
+        ),
+        // bottomNavigationBar: const GNav(
+        //   backgroundColor: Colors.blueGrey,
+        //   tabs: [
+        //     GButton(
+        //       icon: Icons.home,
+        //       text: 'Home',
+        //       iconColor: Colors.blue,
+        //       //textStyle: null,
+        //     ),
+        //     GButton(
+        //       icon: Icons.search,
+        //       onPressed: () {
+        //         showSearch(context: context, delegate: MySearchDelegate())
+        //       },
+        //       text: 'Search',
+        //       iconColor: Colors.amberAccent,
+        //     ),
+        //     GButton(
+        //       icon: Icons.settings,
+        //       text: 'Settings',
+        //       iconColor: Colors.grey,
+        //     ),
+        //   ],
+        // )
+        // //BottomAppBar(
+        // //shape: const CircularNotchedRectangle(),
+        // //child: Container(height: 50.0),
 
-              //_displayTextInputDialog(BuildContext context) async {
-              //print("Loading Dialog");
-              //return showDialog(
-                  
-            //child: Container(height: 50.0),
-          ,
-     
-          
+        // //_displayTextInputDialog(BuildContext context) async {
+        // //print("Loading Dialog");
+        // //return showDialog(
+
+        // //child: Container(height: 50.0),
+        // ,
         floatingActionButton: NewButton(
-          //child: const Icon(Icons.add),
+            //child: const Icon(Icons.add),
             onPressed: () {
-              _displayTextInputDialog(context);
-            }));
+          _displayTextInputDialog(context);
+        }));
+  }
+}
+
+class MySearchDelegate extends SearchDelegate {
+  List<String> searchResults = songs;
+
+  @override
+  Widget? buildLeading(BuildContext context) => IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () => close(context, null),
+      );
+  @override
+  List<Widget>? buildActions(BuildContext context) => [
+        IconButton(
+          icon: const Icon(Icons.clear),
+          onPressed: () {
+            if (query.isEmpty) {
+              close(context, null);
+            } else {
+              query = '';
+            }
+          },
+        ),
+      ];
+  @override
+  Widget buildResults(BuildContext context) => Center(
+      child:
+          Text(key: Key('text1'), query, style: const TextStyle(fontSize: 30)));
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> suggestions = searchResults.where((searchResult) {
+      final result = searchResult.toLowerCase();
+      final input = query.toLowerCase();
+      return result.contains(input);
+    }).toList();
+
+    return ListView.builder(
+      itemCount: suggestions.length,
+      itemBuilder: (context, index) {
+        final suggestion = suggestions[index];
+
+        return ListTile(
+          title: Text(suggestion),
+          onTap: () {
+            query = suggestion;
+
+            showResults(context);
+          },
+        );
+      },
+    );
   }
 }
 
